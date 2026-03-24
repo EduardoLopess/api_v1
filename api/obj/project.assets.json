@@ -80,11 +80,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Edu\\api_v1\\api\\api.csproj",
+      "projectUniqueName": "F:\\Edu\\api_v1\\api_v1\\api\\api.csproj",
       "projectName": "api",
-      "projectPath": "F:\\Edu\\api_v1\\api\\api.csproj",
+      "projectPath": "F:\\Edu\\api_v1\\api_v1\\api\\api.csproj",
       "packagesPath": "C:\\Users\\Edu\\.nuget\\packages\\",
-      "outputPath": "F:\\Edu\\api_v1\\api\\obj\\",
+      "outputPath": "F:\\Edu\\api_v1\\api_v1\\api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Edu\\AppData\\Roaming\\NuGet\\NuGet.Config"

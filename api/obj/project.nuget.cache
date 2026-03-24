@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2JDpn7HHL9U=",
+  "dgSpecHash": "IMOJlGqZ0gY=",
   "success": true,
-  "projectFilePath": "F:\\Edu\\api_v1\\api\\api.csproj",
+  "projectFilePath": "F:\\Edu\\api_v1\\api_v1\\api\\api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Edu\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.3\\microsoft.aspnetcore.openapi.9.0.3.nupkg.sha512",
     "C:\\Users\\Edu\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
