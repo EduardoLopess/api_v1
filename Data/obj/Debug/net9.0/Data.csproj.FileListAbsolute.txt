@@ -1,0 +1,6 @@
+F:\Edu\api_v1\api_v1\Data\obj\Debug\net9.0\Data.csproj.AssemblyReference.cache
+F:\Edu\api_v1\api_v1\Data\obj\Debug\net9.0\Data.GeneratedMSBuildEditorConfig.editorconfig
+F:\Edu\api_v1\api_v1\Data\obj\Debug\net9.0\Data.AssemblyInfoInputs.cache
+F:\Edu\api_v1\api_v1\Data\obj\Debug\net9.0\Data.AssemblyInfo.cs
+F:\Edu\api_v1\api_v1\Data\obj\Debug\net9.0\Data.csproj.CoreCompileInputs.cache
+F:\Edu\api_v1\api_v1\Data\obj\Debug\net9.0\Data.sourcelink.json

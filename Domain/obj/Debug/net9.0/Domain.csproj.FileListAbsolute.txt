@@ -1,0 +1,12 @@
+F:\Edu\api_v1\api_v1\Domain\bin\Debug\net9.0\Domain.deps.json
+F:\Edu\api_v1\api_v1\Domain\bin\Debug\net9.0\Domain.dll
+F:\Edu\api_v1\api_v1\Domain\bin\Debug\net9.0\Domain.pdb
+F:\Edu\api_v1\api_v1\Domain\obj\Debug\net9.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+F:\Edu\api_v1\api_v1\Domain\obj\Debug\net9.0\Domain.AssemblyInfoInputs.cache
+F:\Edu\api_v1\api_v1\Domain\obj\Debug\net9.0\Domain.AssemblyInfo.cs
+F:\Edu\api_v1\api_v1\Domain\obj\Debug\net9.0\Domain.csproj.CoreCompileInputs.cache
+F:\Edu\api_v1\api_v1\Domain\obj\Debug\net9.0\Domain.sourcelink.json
+F:\Edu\api_v1\api_v1\Domain\obj\Debug\net9.0\Domain.dll
+F:\Edu\api_v1\api_v1\Domain\obj\Debug\net9.0\refint\Domain.dll
+F:\Edu\api_v1\api_v1\Domain\obj\Debug\net9.0\Domain.pdb
+F:\Edu\api_v1\api_v1\Domain\obj\Debug\net9.0\ref\Domain.dll
