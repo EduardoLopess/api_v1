@@ -9,6 +9,11 @@ namespace Data.Repository
 {
     public class TableRepository : ITableRepository
     {
+        public Task CreateAsync(Product entity)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task DeleteAsync(int entityId)
         {
             throw new NotImplementedException();

@@ -4,11 +4,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using api.Domain.Entities;
 using api.Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repository
 {
-    public class ProductRepository : IProductRepository
+    public class ProductRepository(DataContext context) : IProductRepository
     {
+        private readonly DataContext _context = context;
+
+        public async Task CreateAsync(Product entity)
+        {
+            _context.Add(entity);
+            await _context.SaveChangesAsync();
+        }
+
         public Task DeleteAsync(int entityId)
         {
             throw new NotImplementedException();
@@ -19,9 +28,11 @@ namespace Data.Repository
             throw new NotImplementedException();
         }
 
-        public Task<Product> GetByIdAsync(int entityId)
+        public async Task<Product?> GetByIdAsync(int entityId)
         {
-            throw new NotImplementedException();
+            return await _context.Products.Include(a => a.Addons)
+                .SingleOrDefaultAsync(p => p.Id == entityId);
+
         }
 
         public Task UpdateAsync(Product entity)
