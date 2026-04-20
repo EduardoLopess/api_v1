@@ -4,6 +4,7 @@ namespace Domain.Table.Enum
     {
         Livre,
         Ocupada,
-        Fechada
+        Fechada,
+        Bloqueada
     }
 }

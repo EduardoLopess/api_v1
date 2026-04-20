@@ -10,5 +10,6 @@ namespace Domain.Common.Interface
         Task<Entity> GetByIdAsync(int entityId);
         Task<IList<Entity>> GetAllAsync();
         
+        
     }
 }

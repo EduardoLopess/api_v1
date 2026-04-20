@@ -12,6 +12,8 @@ namespace Domain.Table.Entity
         public int Number { get; private set; }
         public StatusTable Status { get; private set; }
         public int? IdOrder { get; private set; }
+        public DateTime? LockedUntil { get; private set; }
+
 
 
 
@@ -20,6 +22,7 @@ namespace Domain.Table.Entity
         {
             Status = StatusTable.Livre;
             IdOrder = null;
+           
         }
 
 
@@ -28,8 +31,10 @@ namespace Domain.Table.Entity
             if (idOrder <= 0)
                 throw new ArgumentException("Id inválido.");
 
-            EnsureIsOpen();
+            EsnureNotLocked();
+            EnsureNotClosed();
             EnsureNotOccupied();
+            
 
             SetIdOrder(idOrder);
             Occupy();
@@ -40,14 +45,12 @@ namespace Domain.Table.Entity
 
         public void CloseOrder()
         {
-            if (!IdOrder.HasValue)
-                throw new InvalidOperationException("Mesa sem pedido vinculado.");
+            EnsureOrder();
 
             if (Status == StatusTable.Livre)
                 throw new InvalidOperationException("Mesa já livre.");
 
-            if (Status == StatusTable.Fechada)
-                throw new InvalidOperationException("Mesa fechada não pode ser aberta.");
+            EnsureNotClosed();
 
 
             IdOrder = null;
@@ -79,8 +82,7 @@ namespace Domain.Table.Entity
         //MESA DISPONIBILIDADE
         private void Occupy()
         {
-            if (Status == StatusTable.Fechada)
-                throw new InvalidOperationException("Mesa fechado, não pode ser ocupada.");
+           EnsureNotClosed();
 
             if (Status == StatusTable.Ocupada && IdOrder.HasValue)
                 throw new InvalidOperationException("Mesa já ocupada. ");
@@ -119,7 +121,7 @@ namespace Domain.Table.Entity
 
         //Ensure
 
-        private void EnsureIsOpen()
+        private void EnsureNotClosed()
         {
             if (Status == StatusTable.Fechada)
                 throw new InvalidOperationException("Mesa está fechada.");
@@ -127,21 +129,29 @@ namespace Domain.Table.Entity
 
         private void EnsureNotOccupied()
         {
-            if (Status == StatusTable.Ocupada && IdOrder.HasValue) 
+            if (Status == StatusTable.Ocupada && IdOrder.HasValue)
                 throw new InvalidOperationException("Mesa já está ocupada.");
         }
 
         private void EnsureNotOrder()
         {
-            if (IdOrder.HasValue) 
+            if (IdOrder.HasValue)
                 throw new InvalidOperationException("Pedido já vinculado.");
+        }
+
+        private void EsnureNotLocked()
+        {
+            if (Status == StatusTable.Bloqueada)
+                throw new InvalidOperationException("Mesa bloqueada.");
         }
 
         private void EnsureOrder()
         {
             if (!IdOrder.HasValue)
-                throw new InvalidOperationException("");
+                throw new InvalidOperationException("Sem pedido vinculado.");
         }
+
+
 
 
     }
