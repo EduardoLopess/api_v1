@@ -5,6 +5,6 @@ namespace Domain.Table.Enum
         Livre,
         Ocupada,
         Fechada,
-        Bloqueada
+      
     }
 }
