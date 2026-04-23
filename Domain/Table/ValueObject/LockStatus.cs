@@ -9,22 +9,25 @@ namespace Domain.Table.ValueObject
         public StatusLock StatusLock { get; }
         public DateTime TimeLock { get; }
 
-        public LockStatus(int? idUser, StatusLock statusLock)
+        private LockStatus(int? idUser, StatusLock statusLock)
         {
             IdUser = idUser;
             StatusLock = statusLock;
             TimeLock = DateTime.Now.AddMinutes(30);
         }
 
-        public bool HasUserId() => IdUser.HasValue;
+
+
+        
+        public bool IsSameUser(int idUser) => idUser == IdUser;
         public bool StatusIsLock() => StatusLock == StatusLock.Bloqueado;
         public bool StatusIsUnlocked() => StatusLock == StatusLock.Liberado;
         public bool IsExpired(int minute) => DateTime.UtcNow > TimeLock.AddMinutes(minute);
 
-        public LockStatus Locked(int idUser) => new (idUser, StatusLock.Bloqueado);
-        public LockStatus Unlocked() => new (null, StatusLock.Liberado);
-        
-        
+        public static LockStatus Locked(int idUser) => new(idUser, StatusLock.Bloqueado);
+        public static LockStatus Unlocked() => new(null, StatusLock.Liberado);
+
+
 
 
 

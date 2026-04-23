@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using Domain.Table.Enum;
 using Domain.Table.ValueObject;
 
-namespace Domain.Table.Entity
+namespace Domain.Table
 {
     public class Table
     {
@@ -20,9 +17,7 @@ namespace Domain.Table.Entity
         public Table()
         {
             Status = StatusTable.Livre;
-
-
-
+            LockStatus = LockStatus.Unlocked();
         }
 
 
@@ -106,6 +101,7 @@ namespace Domain.Table.Entity
 
             Status = StatusTable.Livre;
         }
+        
         private void Close()
         {
             EnsureNotOrder();
@@ -121,27 +117,18 @@ namespace Domain.Table.Entity
             LockStatus.Locked(idUser);
         }
 
-        public void UnlockedAccess()
-        {
+     
+
+        public void Unlocked(int idUser)
+        {   
+            if (!LockStatus.IsSameUser(idUser))
+                throw new InvalidOperationException("Úsuario diferente não pode desbloquear a mesa.");
+
             LockStatus.Unlocked();
         }
 
-        //Controle de acesso 1 usuario por vez
-        private void Locked()
-        {
-
-        }
-
-        private void Unlocked()
-        {
-
-        }
-
-        private void RenewBlock()
-        {
-
-        }
-
+   
+   
 
 
         //Ensure

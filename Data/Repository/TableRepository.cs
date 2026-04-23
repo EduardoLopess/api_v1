@@ -2,14 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using api.Domain.Entities;
-using api.Domain.Interfaces;
+using Domain.Table;
 
 namespace Data.Repository
 {
     public class TableRepository : ITableRepository
     {
-        public Task CreateAsync(Product entity)
+        public Task CreateAsync(Table entity)
         {
             throw new NotImplementedException();
         }
@@ -29,7 +28,7 @@ namespace Data.Repository
             throw new NotImplementedException();
         }
 
-        public Task UpdateAsync(Table entity)
+        public Task UpdateAsync(int entity)
         {
             throw new NotImplementedException();
         }

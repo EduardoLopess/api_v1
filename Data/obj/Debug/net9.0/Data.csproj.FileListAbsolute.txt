@@ -4,3 +4,15 @@ F:\Edu\api_v1\api_v1\Data\obj\Debug\net9.0\Data.AssemblyInfoInputs.cache
 F:\Edu\api_v1\api_v1\Data\obj\Debug\net9.0\Data.AssemblyInfo.cs
 F:\Edu\api_v1\api_v1\Data\obj\Debug\net9.0\Data.csproj.CoreCompileInputs.cache
 F:\Edu\api_v1\api_v1\Data\obj\Debug\net9.0\Data.sourcelink.json
+F:\Edu\api_v1\api_v1\Data\bin\Debug\net9.0\Data.deps.json
+F:\Edu\api_v1\api_v1\Data\bin\Debug\net9.0\Data.runtimeconfig.json
+F:\Edu\api_v1\api_v1\Data\bin\Debug\net9.0\Data.dll
+F:\Edu\api_v1\api_v1\Data\bin\Debug\net9.0\Data.pdb
+F:\Edu\api_v1\api_v1\Data\bin\Debug\net9.0\Domain.dll
+F:\Edu\api_v1\api_v1\Data\bin\Debug\net9.0\Domain.pdb
+F:\Edu\api_v1\api_v1\Data\obj\Debug\net9.0\Data.csproj.Up2Date
+F:\Edu\api_v1\api_v1\Data\obj\Debug\net9.0\Data.dll
+F:\Edu\api_v1\api_v1\Data\obj\Debug\net9.0\refint\Data.dll
+F:\Edu\api_v1\api_v1\Data\obj\Debug\net9.0\Data.pdb
+F:\Edu\api_v1\api_v1\Data\obj\Debug\net9.0\Data.genruntimeconfig.cache
+F:\Edu\api_v1\api_v1\Data\obj\Debug\net9.0\ref\Data.dll
