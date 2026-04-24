@@ -8,10 +8,10 @@ namespace Domain.Common.Interface
     public interface IBaseRepository<Entity> where Entity : class
     {   
         Task CreateAsync (Entity entity);
-        Task<Entity> GetByIdAsync (int entityId);
+        Task<Entity?> GetByIdAsync (int entityId);
         Task<IList<Entity>> GetAllAsync();
-        Task DeleteAsync (int entityId);
-        Task UpdateAsync (int entity);
+        
+        Task UpdateAsync (Entity entity);
         
         
     }

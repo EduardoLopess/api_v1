@@ -21,26 +21,26 @@ namespace Domain.Table
         }
 
 
-        public void CreateOrder(int idOrder)
+
+        //Actions
+        public void CreateOrder(int idOrder, int idUser)
         {
             if (idOrder <= 0)
                 throw new ArgumentException("Id inválido.");
 
-            EnsureNotLocked();
+            EnsureUserHasLock(idUser);
             EnsureNotClosed();
             EnsureNotOccupied();
-
-
             SetIdOrder(idOrder);
             Occupy();
 
         }
 
 
-
         public void CloseOrder()
         {
             EnsureIsOrder();
+            EnsureIsLocked();
 
             if (Status == StatusTable.Livre)
                 throw new InvalidOperationException("Mesa já livre.");
@@ -49,11 +49,11 @@ namespace Domain.Table
 
 
             IdOrder = null;
-            Release();
+            ReleaseTable();
 
         }
 
-        public void EnsureCanBeDeleted()
+        public void Deleted()
         {
             if (IdOrder.HasValue && Status == StatusTable.Livre)
                 throw new InvalidOperationException("Estado inválido: mesa com pedido vinculado, mas consta como disponível.");
@@ -72,37 +72,34 @@ namespace Domain.Table
             IdOrder = idOrder;
         }
 
+        //-----------------
 
-        //MESA DISPONIBILIDADE
+        //Actions internal
         private void Occupy()
         {
             EnsureNotClosed();
-
-            if (Status == StatusTable.Ocupada && IdOrder.HasValue)
-                throw new InvalidOperationException("Mesa já ocupada. ");
+            EnsureNotOccupied();
 
             Status = StatusTable.Ocupada;
         }
 
-        private void Release()
+        private void ReleaseTable()
         {
             EnsureNotClosed();
-
             EnsureNotOrder();
 
             Status = StatusTable.Livre;
         }
 
-
-        private void Open()
+        private void OpenTable()
         {
             if (Status != StatusTable.Fechada)
                 throw new InvalidOperationException("Mesa já não consta como fechada.");
 
             Status = StatusTable.Livre;
         }
-        
-        private void Close()
+
+        private void ClosedTable()
         {
             EnsureNotOrder();
 
@@ -114,25 +111,27 @@ namespace Domain.Table
             if (idUser <= 0)
                 throw new ArgumentException("Id inválido.");
 
-            LockStatus.Locked(idUser);
+            LockStatus = LockStatus.Locked(idUser);
         }
 
-     
-
-        public void Unlocked(int idUser)
-        {   
+        public void UnlockedAcess(int idUser)
+        {
             if (!LockStatus.IsSameUser(idUser))
                 throw new InvalidOperationException("Úsuario diferente não pode desbloquear a mesa.");
 
-            LockStatus.Unlocked();
+            LockStatus = LockStatus.Unlocked();
         }
 
-   
-   
+        //-----------------
+
+        //Read to Application
+        public bool IsLocked() => LockStatus.StatusIsLock();
+        public bool IsOccupied() => Status == StatusTable.Ocupada;
+        public bool IsClosed() => Status == StatusTable.Fechada;
+
 
 
         //Ensure
-
         private void EnsureNotClosed()
         {
             if (Status == StatusTable.Fechada)
@@ -151,22 +150,25 @@ namespace Domain.Table
                 throw new InvalidOperationException("Pedido vinculado.");
         }
 
-
-
         private void EnsureIsOrder()
         {
             if (!IdOrder.HasValue)
                 throw new InvalidOperationException("Sem pedido vinculado.");
         }
 
-
-        private void EnsureNotLocked()
+        private void EnsureIsLocked()
         {
-            if (LockStatus.StatusIsLock())
-                throw new InvalidOperationException();
+            if (!LockStatus.StatusIsLock())
+                throw new InvalidOperationException("Mesa precisa estar bloqueada.");
         }
 
+        private void EnsureUserHasLock(int idUser)
+        {
+            if (!LockStatus.StatusIsLock())
+                throw new InvalidOperationException("Mesa não está bloqueada.");
 
-
+            if (!LockStatus.IsSameUser(idUser))
+                throw new InvalidOperationException("Úsuario não possui o bloqueio.");
+        }
     }
 }

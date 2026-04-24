@@ -3,34 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain.Table;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repository
 {
-    public class TableRepository : ITableRepository
+    public class TableRepository(DataContext context) : ITableRepository
     {
-        public Task CreateAsync(Table entity)
+        private readonly DataContext _context = context;
+
+        public async Task CreateAsync(Table entity)
         {
-            throw new NotImplementedException();
+            _context.Tables.Add(entity);
+            await _context.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(int entityId)
+        public async Task<IList<Table>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Tables.ToListAsync();
         }
 
-        public Task<IList<Table>> GetAllAsync()
+        public async Task<Table?> GetByIdAsync(int entityId)
         {
-            throw new NotImplementedException();
+            return await _context.Tables.FindAsync(entityId);
         }
 
-        public Task<Table> GetByIdAsync(int entityId)
+        public async Task UpdateAsync(Table entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateAsync(int entity)
-        {
-            throw new NotImplementedException();
+           await _context.SaveChangesAsync();
         }
     }
 }
