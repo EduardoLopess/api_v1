@@ -27,6 +27,11 @@ namespace Data.Repository
             return await _context.Tables.FindAsync(entityId);
         }
 
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
+
         public async Task UpdateAsync(Table entity)
         {
            await _context.SaveChangesAsync();

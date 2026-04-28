@@ -9,7 +9,7 @@ namespace Domain.Table
         public int Id { get; private set; }
         public int Number { get; private set; }
         public StatusTable Status { get; private set; }
-        public int? IdOrder { get; private set; }
+        public OrderId? OrderId { get; private set; }
         public LockStatus LockStatus { get; private set; }
 
 
@@ -23,11 +23,8 @@ namespace Domain.Table
 
 
         //Actions
-        public void CreateOrder(int idOrder, int idUser)
+        public void CreateOrder(OrderId idOrder, int idUser)
         {
-            if (idOrder <= 0)
-                throw new ArgumentException("Id inválido.");
-
             EnsureUserHasLock(idUser);
             EnsureNotClosed();
             EnsureNotOccupied();
@@ -42,34 +39,32 @@ namespace Domain.Table
             EnsureIsOrder();
             EnsureIsLocked();
 
-            if (Status == StatusTable.Livre)
+            if (Status is StatusTable.Livre)
                 throw new InvalidOperationException("Mesa já livre.");
 
             EnsureNotClosed();
 
 
-            IdOrder = null;
+            OrderId = null;
             ReleaseTable();
 
         }
 
         public void Deleted()
         {
-            if (IdOrder.HasValue && Status == StatusTable.Livre)
+            if (OrderId is not null && Status is StatusTable.Livre)
                 throw new InvalidOperationException("Estado inválido: mesa com pedido vinculado, mas consta como disponível.");
 
             EnsureNotOrder();
         }
 
-        private void SetIdOrder(int idOrder)
+        private void SetIdOrder(OrderId idOrder)
         {
-            if (idOrder <= 0)
-                throw new ArgumentException("Id inválido. ");
 
             EnsureNotOccupied();
             EnsureNotOrder();
 
-            IdOrder = idOrder;
+            OrderId = idOrder;
         }
 
         //-----------------
@@ -93,13 +88,13 @@ namespace Domain.Table
 
         private void OpenTable()
         {
-            if (Status != StatusTable.Fechada)
+            if (Status is not StatusTable.Fechada)
                 throw new InvalidOperationException("Mesa já não consta como fechada.");
 
             Status = StatusTable.Livre;
         }
 
-        private void ClosedTable()
+        public void Close()
         {
             EnsureNotOrder();
 
@@ -108,7 +103,7 @@ namespace Domain.Table
 
         public void LockedAcess(int idUser)
         {
-            if (idUser <= 0)
+            if (idUser is <= 0)
                 throw new ArgumentException("Id inválido.");
 
             LockStatus = LockStatus.Locked(idUser);
@@ -134,25 +129,25 @@ namespace Domain.Table
         //Ensure
         private void EnsureNotClosed()
         {
-            if (Status == StatusTable.Fechada)
+            if (Status is StatusTable.Fechada)
                 throw new InvalidOperationException("Mesa está fechada.");
         }
 
         private void EnsureNotOccupied()
         {
-            if (Status == StatusTable.Ocupada && IdOrder.HasValue)
+            if (Status is StatusTable.Ocupada && OrderId is not null)
                 throw new InvalidOperationException("Mesa já está ocupada.");
         }
 
         private void EnsureNotOrder()
         {
-            if (IdOrder.HasValue)
+            if (OrderId is not null)
                 throw new InvalidOperationException("Pedido vinculado.");
         }
 
         private void EnsureIsOrder()
         {
-            if (!IdOrder.HasValue)
+            if (OrderId is null)
                 throw new InvalidOperationException("Sem pedido vinculado.");
         }
 

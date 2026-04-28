@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 namespace Domain.Common.Interface
 {
     public interface IBaseRepository<Entity> where Entity : class
-    {   
-        Task CreateAsync (Entity entity);
-        Task<Entity?> GetByIdAsync (int entityId);
+    {
+        Task CreateAsync(Entity entity);
+        Task<Entity?> GetByIdAsync(int entityId);
         Task<IList<Entity>> GetAllAsync();
-        
-        Task UpdateAsync (Entity entity);
-        
-        
+        Task SaveChangesAsync();
+        Task UpdateAsync(Entity entity);
+
+
     }
 }
